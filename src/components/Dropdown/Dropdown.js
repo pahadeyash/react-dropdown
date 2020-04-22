@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import Header from '../Header/Header'
 import ListItem from '../ListItem/ListItem'
 import Footer from '../Footer/Footer'
@@ -33,7 +33,6 @@ function Dropdown(props) {
     function selectAll(){
         let itemsValues = []
         for (let i = 0; i < items.length; i++){
-            console.log(items[i])
             itemsValues.push(items[i].value)
         }
         setSelection([...itemsValues])
@@ -41,6 +40,14 @@ function Dropdown(props) {
 
     function deSelectAll(){
         setSelection([])
+    }
+
+    function handleSubmit(task){
+        var newItem = {
+            id: items.length,
+            value: task
+        }
+        setItems([...items, newItem])
     }
 
     return (
@@ -56,7 +63,7 @@ function Dropdown(props) {
                             isItemSelected={isItemInSelection(item)}
                         /> 
                     ))}
-                    <Footer selectAll={selectAll} deSelectAll={deSelectAll}/>
+                    <Footer selectAll={selectAll} deSelectAll={deSelectAll} handleSubmit={handleSubmit}/>
                 </ul>
             )}
         </div>
